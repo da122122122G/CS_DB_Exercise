@@ -7,9 +7,9 @@ using CS_DB_Exercise.Infrastructures.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace CS_DB_Exercise.Infrastructures;
+namespace CS_DB_Exercise.Infrastructures.Accessor;
 
-public class EmployeeAccessor
+public class DepartmentAccessor
 {
     private readonly AppDbContext _context;
 
@@ -17,7 +17,7 @@ public class EmployeeAccessor
     /// コンストラクタ
     /// </summary>
     /// <param name="context">アプリケーション用DbContext</param>
-    public EmployeeAccessor(AppDbContext context)
+    public DepartmentAccessor(AppDbContext context)
     {
         _context = context;
     }
@@ -25,21 +25,21 @@ public class EmployeeAccessor
     /// <summary>
     /// すべての部署を取得する
     /// </summary>
-    public List<EmployeeEntity> FindAll()
+    public List<DepartmentEntity> FindAll()
     {
         // ToList()メソッドを使用して、すべての部署を取得する
-        var employee = _context.Employees.ToList();
-        return employee;
+        var departments = _context.Departments.ToList();
+        return departments;
     }
 
     /// <summary>
     /// 指定した部署Idの部署を取得する
     /// </summary>
     /// <param name="departmentId">部署Id(主キー)</param>
-    public EmployeeEntity? FindById(int memberId)
+    public DepartmentEntity? FindById(int departmentId)
     {
         // Find()メソッドを使用して、指定した部署Idの部署を取得する
-        var employee = _context.Employees.Find(memberId);
-        return employee;
+        var department = _context.Departments.Find(departmentId);
+        return department;
     }
 }
