@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CS_DB_Exercise.Infrastructures.Entities;
-using CS_DB_Sample.Infrastructures.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -16,9 +15,9 @@ namespace CS_DB_Exercise.Infrastructures.Contexts
         public DbSet<EmployeeEntity> Employees { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString = "Host=localhost;Database=cs_db_exercise;Username=postgres;Password=training;";
+            string connectionString =
+            "Host=localhost;Database=cs_db_exercise;Username=postgres;Password=training;";
             optionsBuilder
-
             .UseNpgsql(connectionString)
             .LogTo(Console.WriteLine, LogLevel.Information)
             .EnableSensitiveDataLogging();
