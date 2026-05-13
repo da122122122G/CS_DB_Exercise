@@ -25,7 +25,8 @@ class Program
         //Exercise11(employeeAccessor, departmentAccessor);
         //Exercise13(employeeAccessor, departmentAccessor);
         //Exercise14(employeeAccessor, departmentAccessor);
-        Exercise15(context, departmentAccessor);
+        //Exercise15(context, departmentAccessor);
+        Exercise16(employeeAccessor, departmentAccessor);
     }
     /*
         var employees = accessor.FindByDeptId();
@@ -211,7 +212,7 @@ newEmployees.(newEmployees)
         }
     }*/
 
-    private static void Exercise15(DbContext context, DepartmentAccessor departmentAccessor)
+    /*private static void Exercise15(DbContext context, DepartmentAccessor departmentAccessor)
     {
         using var transaction = context.Database.BeginTransaction();
         Console.WriteLine("トランザクションを開始しました。");
@@ -245,7 +246,24 @@ newEmployees.(newEmployees)
         {
             Console.WriteLine($"部署Id={department.Id} , 部署名={department.Name}");
         }
+    }*/
+
+    private static void Exercise16(EmployeeAccessor employeeAccessor, DepartmentAccessor departmentAccessor)
+    {
+        Console.Write("社員名を入力してください->");
+        string name = Console.ReadLine()!;
+        var results = employeeAccessor.FindByNameContainsJoinDepartment(name!);
+        if (results == null)
+        {
+            Console.WriteLine($"{name}さんは、存在しません。");
+        }
+        else
+        {
+            foreach (var result in results)
+                Console.WriteLine($"{name}さんは、{result.Department!.Name}に所属する社員です。");
+        }
     }
+
 
 
 }

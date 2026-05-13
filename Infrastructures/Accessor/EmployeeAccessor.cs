@@ -91,4 +91,17 @@ public class EmployeeAccessor
         .SingleOrDefault();
         return employee;
     }
+
+    public List<EmployeeEntity>? FindByNameContainsJoinDepartment(string name)
+    {
+        var employees = _context.Employees
+        .Include(e => e.Department)
+        .Where(e => e.Name!.Contains(name))
+        .ToList();
+        if (employees.Count == 0)
+        {
+            return null;
+        }
+        return employees;
+    }
 }
