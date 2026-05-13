@@ -18,6 +18,9 @@ namespace CS_DB_Exercise.Infrastructures.Entities
         [Column("name")]
         public string? Name { get; set; }
 
+        public List<EmployeeEntity>? Employees { get; set; }
+
+
         public override string ToString()
         {
             return $"部署ID={Id},部署名={Name}";

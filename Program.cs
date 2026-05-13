@@ -20,7 +20,9 @@ class Program
 
         //Exercise07(employeeAccessor);
         //Exercise08(employeeAccessor);
-        Exercise10(employeeAccessor, departmentAccessor);
+        //Exercise11(employeeAccessor, departmentAccessor);
+        //Exercise13(employeeAccessor, departmentAccessor);
+        Exercise14(employeeAccessor, departmentAccessor);
     }
     /*
         var employees = accessor.FindByDeptId();
@@ -134,7 +136,7 @@ newEmployees.(newEmployees)
         Console.WriteLine($"社員名:{name}、部署Id:{deptId}の社員を登録しました");
     }*/
 
-    static void Exercise10(EmployeeAccessor employeeAccessor, DepartmentAccessor departmentAccessor)
+    /*static void Exercise10(EmployeeAccessor employeeAccessor, DepartmentAccessor departmentAccessor)
     {
         Console.Write("社員idを入力してください->");
         int id = int.Parse(Console.ReadLine()!);
@@ -142,20 +144,70 @@ newEmployees.(newEmployees)
         string name = Console.ReadLine()!;
 
         Console.WriteLine("演習-10 指定された社員Idの社員名を変更する");
-        if (departmentAccessor.FindById(id) == null)
+        if (employeeAccessor.FindById(id) == null)
         {
             Console.WriteLine($"社員Id:{id}は存在しないため、変更できません");
             return;
         }
-
-        var newEmployee = new EmployeeEntity
-        {
-            Name = name,
-            Id = id
-        };
-
-        employeeAccessor.UpdateById(newEmployee);
+        var targetEmployee = employeeAccessor.FindById(id);
+        targetEmployee.Name = name!;
+        employeeAccessor.UpdateById(targetEmployee);
         Console.WriteLine($"社員名:を{name}に変更しました");
+    }*/
+
+    /*static void Exercise11(EmployeeAccessor employeeAccessor, DepartmentAccessor departmentAccessor)
+    {
+        Console.Write("消去したい社員idを入力してください->");
+        int id = int.Parse(Console.ReadLine()!);
+
+        Console.WriteLine("演習-10 指定された社員Idの社員名を変更する");
+        if (employeeAccessor.FindById(id) == null)
+        {
+            Console.WriteLine($"社員Id:{id}は存在しないため、変更できません");
+            return;
+        }
+        employeeAccessor.DeleteById(id);
+        Console.WriteLine($"社員id:{id}の社員を削除しました");
+    }*/
+
+
+    /*static void Exercise13(EmployeeAccessor employeeAccessor, DepartmentAccessor departmentAccessor)
+    {
+        Console.Write("社員名を入力してください->");
+        string name = Console.ReadLine()!;
+        Console.WriteLine("演習-13 指定された氏名で社員と所属部署を取得する");
+        var employee = employeeAccessor.FindByNameJoinDepartment(name);
+
+        if (employee == null)
+        {
+            Console.WriteLine($"社員名:{name}の社員は存在しませんでした");
+            return;
+        }
+
+        Console.WriteLine(employee);
+        Console.WriteLine(employee!.Department);
+    }*/
+
+    static void Exercise14(EmployeeAccessor employeeAccessor, DepartmentAccessor departmentAccessor)
+    {
+        Console.Write("部署Idを入力してください->");
+        var deptId = int.Parse(Console.ReadLine()!);
+
+        Console.WriteLine("演習-14 指定された部署Idの部署と所属社員を取得する");
+        // departmentテーブルアクセスクラスのFindByIdJoinEmployeeメソッドを呼び出して、指定された部署Idの部署と所属社員を取得する
+        var result = departmentAccessor.FindByIdJoinEmployee(deptId);
+        if (result == null)
+        {
+            Console.WriteLine($"部署Id:{deptId}の部署は存在しませんでした");
+            return;
+        }
+        Console.WriteLine(result);
+
+        // 取得した部署に所属する社員を出力する
+        foreach (var employee in result.Employees!)
+        {
+            Console.WriteLine(employee);
+        }
     }
 
 }

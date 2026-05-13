@@ -42,4 +42,15 @@ public class DepartmentAccessor
         var department = _context.Departments.Find(departmentId);
         return department;
     }
+
+    public DepartmentEntity? FindByIdJoinEmployee(int id)
+    {
+        var department = _context.Departments
+        .Include(d => d.Employees)
+        .Where(d => d.Id == id)
+        .SingleOrDefault();
+        return department;
+    }
+
+
 }

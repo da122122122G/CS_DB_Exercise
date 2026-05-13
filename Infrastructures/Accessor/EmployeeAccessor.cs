@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CS_DB_Exercise.Infrastructures.Entities;
 using CS_DB_Exercise.Infrastructures.Contexts;
+using CS_DB_Exercise.Infrastructures.Accessor;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,7 +38,7 @@ public class EmployeeAccessor
     public List<EmployeeEntity>? FindByContaintsName(string keyword)
     {
         var employees = _context.Employees
-    .Where(e => e.Name!.Contains(keyword))
+            .Where(e => e.Name!.Contains(keyword))
     .ToList();
         if (employees.Count == 0)
         {
@@ -74,10 +75,20 @@ public class EmployeeAccessor
         return result.Entity;
     }
 
-    /*public EmployeeEntity DeleteById(int id)
+    public EmployeeEntity DeleteById(int id)
     {
-        var result = _context.Employees.Remove(id);
+        EmployeeEntity targetEmployee = _context.Employees.Find(id)!;
+        var result = _context.Employees.Remove(targetEmployee);
         _context.SaveChanges();
         return result.Entity;
-    }*/
+    }
+
+    public EmployeeEntity? FindByNameJoinDepartment(string name)
+    {
+        var employee = _context.Employees
+        .Include(e => e.Department)
+        .Where(e => e.Name == name)
+        .SingleOrDefault();
+        return employee;
+    }
 }
