@@ -2,6 +2,7 @@
 using CS_DB_Exercise.Infrastructures.Entities;
 using CS_DB_Exercise.Infrastructures.Contexts;
 using CS_DB_Exercise.Infrastructures.Accessor;
+using CS_DB_Sample.Infrastructures.Queries;
 
 
 
@@ -15,7 +16,11 @@ class Program
         //var accessor = new EmployeeAccessor(new AppDbContext());
         var context = new AppDbContext();
         var employeeAccessor = new EmployeeAccessor(context);
-        Exercise07(employeeAccessor);
+        var departmentAccessor = new DepartmentAccessor(context);
+
+        //Exercise07(employeeAccessor);
+        //Exercise08(employeeAccessor);
+        Exercise09(employeeAccessor, departmentAccessor);
     }
     /*
         var employees = accessor.FindByDeptId();
@@ -31,10 +36,10 @@ class Program
             Console.WriteLine($"存在する部署Id:{department}");
 
 
-        }*/
+        }
     static void Exercise07(EmployeeAccessor accessor)
     {
-        /*Console.Write("部署Idを入力してください->");
+        Console.Write("部署Idを入力してください->");
         var deptId = int.Parse(Console.ReadLine()!);
         var employees = accessor.FindByDeptId(deptId);
 
@@ -48,8 +53,11 @@ class Program
         else
         {
             Console.WriteLine($"部署Id:{deptId}の社員は存在しません");
-        }*/
+        }
+        return;}*/
 
+    /*static void Exercise08(EmployeeAccessor accessor)
+    {
         Console.Write("キーワードを入力してください->");
         var keyword = Console.ReadLine()!;
         var employees = accessor.FindByContaintsName(keyword);
@@ -67,6 +75,30 @@ class Program
             Console.WriteLine($"キーワード:{keyword}を含む社員は存在しません");
         }
 
-        return;
+    }*/
+
+    static void Exercise09(EmployeeAccessor employeeAccessor, DepartmentAccessor departmentAccessor)
+    {
+        Console.Write("社員名を入力してください->");
+        string name = Console.ReadLine()!;
+        Console.Write("部署idを入力してください->");
+        int deptId = int.Parse(Console.ReadLine()!);
+
+        Console.WriteLine("演習-09 employeeテーブルに新しい社員の情報を登録する");
+        if (departmentAccessor.FindById(deptId) == null)
+        {
+            Console.WriteLine($"部署Id:{deptId}は存在しないため、社員登録できません");
+            return;
+        }
+
+        var newEmployee = new EmployeeEntity
+        {
+            Name = name,
+            DeptId = deptId
+        };
+
+        employeeAccessor.Create(newEmployee);
+        Console.WriteLine($"社員名:{name}、部署Id:{deptId}の社員を登録しました");
     }
+
 }

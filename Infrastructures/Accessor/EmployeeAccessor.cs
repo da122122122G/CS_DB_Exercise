@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using CS_DB_Exercise.Infrastructures.Entities;
 using CS_DB_Exercise.Infrastructures.Contexts;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore;
 
 namespace CS_DB_Exercise.Infrastructures.Accessor;
 
@@ -42,5 +44,12 @@ public class EmployeeAccessor
             return null;
         }
         return employees;
+    }
+
+    public EmployeeEntity Create(EmployeeEntity employee)
+    {
+        var result = _context.Employees.Add(employee);
+        _context.SaveChanges();
+        return result.Entity;
     }
 }
