@@ -20,7 +20,7 @@ class Program
 
         //Exercise07(employeeAccessor);
         //Exercise08(employeeAccessor);
-        Exercise09(employeeAccessor, departmentAccessor);
+        Exercise10(employeeAccessor, departmentAccessor);
     }
     /*
         var employees = accessor.FindByDeptId();
@@ -77,7 +77,7 @@ class Program
 
     }*/
 
-    static void Exercise09(EmployeeAccessor employeeAccessor, DepartmentAccessor departmentAccessor)
+    /*static void Exercise09(EmployeeAccessor employeeAccessor, DepartmentAccessor departmentAccessor)
     {
         Console.Write("社員名を入力してください->");
         string name = Console.ReadLine()!;
@@ -99,6 +99,63 @@ class Program
 
         employeeAccessor.Create(newEmployee);
         Console.WriteLine($"社員名:{name}、部署Id:{deptId}の社員を登録しました");
+    }*/
+
+    /*static void Exercise09(EmployeeAccessor employeeAccessor, DepartmentAccessor departmentAccessor)
+
+    
+    {
+        while (true)
+        {
+            Console.Write("社員名を入力してください->");
+            string name = Console.ReadLine()!;
+                if (name == null)
+                {
+                    break;
+                }
+
+            Console.Write("部署idを入力してください->");
+            int deptId = int.Parse(Console.ReadLine()!);
+            if (departmentAccessor.FindById(deptId) == null)
+            {
+                Console.WriteLine($"部署Id:{deptId}は存在しないため、社員登録できません");
+                continue;
+            }
+        }
+
+        Console.WriteLine("演習-09 employeeテーブルに新しい社員の情報を登録する");
+        var newEmployees = new EmployeeEntity
+        {
+            Name = name,
+            DeptId = deptId
+        };
+newEmployees.(newEmployees)
+        employeeAccessor.Create(newEmployee);
+        Console.WriteLine($"社員名:{name}、部署Id:{deptId}の社員を登録しました");
+    }*/
+
+    static void Exercise10(EmployeeAccessor employeeAccessor, DepartmentAccessor departmentAccessor)
+    {
+        Console.Write("社員idを入力してください->");
+        int id = int.Parse(Console.ReadLine()!);
+        Console.Write("社員名を入力してください->");
+        string name = Console.ReadLine()!;
+
+        Console.WriteLine("演習-10 指定された社員Idの社員名を変更する");
+        if (departmentAccessor.FindById(id) == null)
+        {
+            Console.WriteLine($"社員Id:{id}は存在しないため、変更できません");
+            return;
+        }
+
+        var newEmployee = new EmployeeEntity
+        {
+            Name = name,
+            Id = id
+        };
+
+        employeeAccessor.UpdateById(newEmployee);
+        Console.WriteLine($"社員名:を{name}に変更しました");
     }
 
 }

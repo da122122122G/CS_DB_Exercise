@@ -22,7 +22,8 @@ namespace CS_DB_Exercise.Infrastructures.Contexts
             .UseNpgsql(connectionString)    //PostgreSQLを利用することを宣言
             .LogTo(Console.WriteLine, LogLevel.Information) //Logを吐き出す
             .EnableSensitiveDataLogging()  //機密データのログ出力許可
-            .EnableDetailedErrors();    //エラーの詳細を表示
+            //.EnableDetailedErrors()    //エラーの詳細を表示
+            ;
         }
 
 
