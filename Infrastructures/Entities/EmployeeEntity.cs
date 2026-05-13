@@ -22,7 +22,7 @@ namespace CS_DB_Exercise.Infrastructures.Entities
 
         public override string ToString()
         {
-            return $"従業員ID={Id} 従業員名={Name} 部署ID={DeptId}";
+            return $"部署ID={DeptId} 従業員ID={Id} 従業員名={Name}";
         }
     }
 }

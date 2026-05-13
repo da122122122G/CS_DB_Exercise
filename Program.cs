@@ -34,7 +34,7 @@ class Program
         }*/
     static void Exercise07(EmployeeAccessor accessor)
     {
-        Console.Write("部署Idを入力してください->");
+        /*Console.Write("部署Idを入力してください->");
         var deptId = int.Parse(Console.ReadLine()!);
         var employees = accessor.FindByDeptId(deptId);
 
@@ -48,7 +48,25 @@ class Program
         else
         {
             Console.WriteLine($"部署Id:{deptId}の社員は存在しません");
+        }*/
+
+        Console.Write("キーワードを入力してください->");
+        var keyword = Console.ReadLine()!;
+        var employees = accessor.FindByContaintsName(keyword);
+        Console.WriteLine("演習-08 employeeテーブルから社員名の部分一致検索で該当社員を取得する");
+
+        if (employees != null)
+        {
+            foreach (var employee in employees)
+            {
+                Console.WriteLine(employee);
+            }
         }
+        else
+        {
+            Console.WriteLine($"キーワード:{keyword}を含む社員は存在しません");
+        }
+
         return;
     }
 }

@@ -17,11 +17,12 @@ namespace CS_DB_Exercise.Infrastructures.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string connectionString =
-            "Host=localhost;Database=cs_db_exercise;Username=postgres;Password=training;";
+            "Host=localhost;Database=cs_db_exercise;Username=postgres;Password=training;";  //接続文字列の定義
             optionsBuilder
-            .UseNpgsql(connectionString)
-            .LogTo(Console.WriteLine, LogLevel.Information)
-            .EnableSensitiveDataLogging();
+            .UseNpgsql(connectionString)    //PostgreSQLを利用することを宣言
+            .LogTo(Console.WriteLine, LogLevel.Information) //Logを吐き出す
+            .EnableSensitiveDataLogging()  //機密データのログ出力許可
+            .EnableDetailedErrors();    //エラーの詳細を表示
         }
 
 
