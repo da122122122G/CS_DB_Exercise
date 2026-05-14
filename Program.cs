@@ -26,7 +26,7 @@ class Program
         //Exercise13(employeeAccessor, departmentAccessor);
         //Exercise14(employeeAccessor, departmentAccessor);
         //Exercise15(context, departmentAccessor);
-        Exercise16(employeeAccessor, departmentAccessor);
+        Exercise16(employeeAccessor);
     }
     /*
         var employees = accessor.FindByDeptId();
@@ -248,7 +248,7 @@ newEmployees.(newEmployees)
         }
     }*/
 
-    private static void Exercise16(EmployeeAccessor employeeAccessor, DepartmentAccessor departmentAccessor)
+    private static void Exercise16(EmployeeAccessor employeeAccessor)
     {
         Console.Write("社員名を入力してください->");
         string name = Console.ReadLine()!;
@@ -259,7 +259,7 @@ newEmployees.(newEmployees)
         }
         else
         {
-            foreach (var result in results)
+            foreach (EmployeeEntity? result in results)
                 Console.WriteLine($"{name}さんは、{result.Department!.Name}に所属する社員です。");
         }
     }
